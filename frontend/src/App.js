@@ -3,35 +3,48 @@ import './App.css';
 
 const autoCompleteURL ="https://api.weatherapi.com/v1/search.json?key=94fa33516b0e48c2a67170420222911&q="
 
+const weatherURL =(city)=>
+  `https://api.weatherapi.com/v1/forecast.json?key=94fa33516b0e48c2a67170420222911&q=${city}&days=1&aqi=no&alerts=no`
+
+
 function App() {
   const [city,setCity]= useState("");
   const [clicked,setClicked] = useState(false);
+  const [current,setCurrent] = useState();
+  const [forecast,setForecast] = useState();
   const [citysuggestion,setCitySuggestion] = useState([]);
 
 
-  const handleclick=(clickedcity)=>{
-    console.log(clickedcity)
+  const handleclick= async (clickedcity)=>{
     setCity(clickedcity);
-   setClicked(true);
-    // setCitySuggestion([]);
+    setClicked(true);
+   
+   const response = await fetch(weatherURL(city));
+   const data = await response.json();
+   setCurrent(data.current);
+   setForecast(data.forecast);
   }
 
   useEffect(()=>{
-    const fetchcitysuggestion = async()=>{
-      const res = await fetch(autoCompleteURL +city);
-      const data = await res.json();
-      const citySuggestionData = data.map(curdata=>`${curdata.name}, ${curdata.region}, ${curdata.country}`)
-      setCitySuggestion(citySuggestionData);
+    const getDataAfterTimer=setTimeout(()=>{
+      const fetchcitysuggestion = async()=>{
+        const res = await fetch(autoCompleteURL +city);
+        const data = await res.json();
 
-    }
-    if(!clicked && city.length>2){
-      fetchcitysuggestion();
-    }
-    else{
-      setCitySuggestion([]);
-      setClicked(false)
-    }
-    
+        const citySuggestionData = data.map(curdata=>`${curdata.name}, ${curdata.region}, ${curdata.country}`)
+        setCitySuggestion(citySuggestionData);
+  
+      }
+      if(!clicked && city.length>2){
+        fetchcitysuggestion();
+      }
+      else{
+        setCitySuggestion([]);
+        setClicked(false)
+      }
+    },1000)
+   
+    return ()=>clearTimeout(getDataAfterTimer) 
   },[city])
 
   return (
