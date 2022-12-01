@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import Current from './components/Current';
+import ForeCast from './components/ForeCast';
 
 const autoCompleteURL ="https://api.weatherapi.com/v1/search.json?key=94fa33516b0e48c2a67170420222911&q="
 
@@ -12,6 +14,7 @@ function App() {
   const [clicked,setClicked] = useState(false);
   const [current,setCurrent] = useState();
   const [forecast,setForecast] = useState();
+  const [location,setLocation] = useState("");
   const [citysuggestion,setCitySuggestion] = useState([]);
 
 
@@ -23,6 +26,7 @@ function App() {
    const data = await response.json();
    setCurrent(data.current);
    setForecast(data.forecast);
+   setLocation(data.location.name)
   }
 
   useEffect(()=>{
@@ -44,7 +48,7 @@ function App() {
       }
     },1000)
    
-    return ()=>clearTimeout(getDataAfterTimer) 
+    return ()=>clearTimeout(getDataAfterTimer); 
   },[city])
 
   return (
@@ -61,7 +65,9 @@ function App() {
               ))}
               </div>
             )}
-            
+            {current && <Current current={current} city={location}/>}
+            {forecast && <ForeCast forecast ={forecast}/>}
+                        
         </div>      
     </div>
   );

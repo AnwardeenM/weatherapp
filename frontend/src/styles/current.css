@@ -1,0 +1,12 @@
+.current{
+    background-color: lightgoldenrodyellow;
+    color: black;
+    width: 80vw;
+    margin: 5vh;
+}
+.currentBody{
+    margin: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
