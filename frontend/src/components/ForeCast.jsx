@@ -5,6 +5,20 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "../styles/forecast.css";
+import LinearProgress,{linearProgressClasses} from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height:20,
+  borderRadius: 10,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 10,
+    backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+  },
+}));
 
 
 function ForeCast({city,forecast:{forecastday}}) {
@@ -39,6 +53,20 @@ function ForeCast({city,forecast:{forecastday}}) {
               
             </AccordionSummary>
             <AccordionDetails>
+              {
+                hour.map((curHourForecast,index)=>{
+                  return(
+                    <div className="curhourtrack">
+                      <b>{index}:00</b>
+                      <img src={curHourForecast.condition.icon} alt="" />
+                      <div className="linearprogress">
+                      <BorderLinearProgress variant='determinate' value={curHourForecast.temp_c*100/maxtemp_c} />
+                      {curHourForecast.temp_c} <b>deg</b>
+                      </div>
+                    </div>
+                  )
+                })
+              }
               
             </AccordionDetails>
           </Accordion>

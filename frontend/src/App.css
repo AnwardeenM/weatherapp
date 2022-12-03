@@ -30,6 +30,11 @@
   height: 20vh;
   overflow-y: scroll;
 }
+
+.suggestionWrapper::-webkit-scrollbar{
+  display: none;
+}
+
 .suggestion:hover{
   color: blue;
   cursor: pointer;
