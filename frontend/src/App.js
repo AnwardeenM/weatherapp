@@ -6,7 +6,7 @@ import ForeCast from './components/ForeCast';
 const autoCompleteURL ="https://api.weatherapi.com/v1/search.json?key=94fa33516b0e48c2a67170420222911&q="
 
 const weatherURL =(city)=>
-  `https://api.weatherapi.com/v1/forecast.json?key=94fa33516b0e48c2a67170420222911&q=${city}&days=1&aqi=no&alerts=no`
+  `https://api.weatherapi.com/v1/forecast.json?key=94fa33516b0e48c2a67170420222911&q=${city}&days=7&aqi=no&alerts=no`
 
 
 function App() {
@@ -66,7 +66,7 @@ function App() {
               </div>
             )}
             {current && <Current current={current} city={location}/>}
-            {forecast && <ForeCast forecast ={forecast}/>}
+            {forecast && <ForeCast forecast ={forecast} city={location}/>}
                         
         </div>      
     </div>
