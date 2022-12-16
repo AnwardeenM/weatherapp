@@ -3,10 +3,13 @@ import './App.css';
 import Current from './components/Current';
 import ForeCast from './components/ForeCast';
 
-const autoCompleteURL ="https://api.weatherapi.com/v1/search.json?key=94fa33516b0e48c2a67170420222911&q="
+// const YOUR_ACCESS_KEY ="f0c0b307cc0febdb7017fffca7592da8";
+
+const autoCompleteURL ="https://api.weatherapi.com/v1/search.json?key=9ea20cd5e9194dc086b105226221612&q="
+// const WeatherStackURL ="http://api.weatherstack.com/forecast?access_key=YOUR_ACCESS_KEY&query=" 
 
 const weatherURL =(city)=>
-  `https://api.weatherapi.com/v1/forecast.json?key=94fa33516b0e48c2a67170420222911&q=${city}&days=7&aqi=no&alerts=no`
+  `https://api.weatherapi.com/v1/forecast.json?key=9ea20cd5e9194dc086b105226221612&q=${city}&days=7&aqi=no&alerts=no`
 
 
 function App() {

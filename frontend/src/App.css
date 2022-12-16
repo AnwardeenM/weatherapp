@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   color: white;
-  border-bottom: 5px solid red;
+  border-bottom: 5px solid whitesmoke;
   position: sticky;
   top: 0;
   background-color: #282c34;
@@ -26,7 +26,7 @@
 }
 
 .suggestionWrapper{
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 20vh;
   overflow-y: scroll;
 }

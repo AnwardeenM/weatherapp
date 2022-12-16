@@ -31,7 +31,7 @@ function ForeCast({city,forecast:{forecastday}}) {
 
   return (
     <div className='forecast_body'>
-      Forecast for {city}
+      
       {
         forecastday.map((curDateforecast)=>{
           const{date,day,hour} = curDateforecast;
